@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<head>
+   <title>Admin  Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      margin: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
+
+    .success-message {
+      color: #008000;
+      margin-bottom: 10px;
+    }
+
+    .switch-form {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .switch-form a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .switch-form a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  
+<form>
+    <form id="login-form" style="display: none;" onsubmit="validateLogin(event)">
+      <h2>Admin Login</h2>
+
+      <div class="error-message" id="login-error-message"></div>
+
+      <label for="login-username">Username:</label>
+      <input type="text" id="login-username" name="login-username" required>
+
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" name="login-password" required>
+
+      <button type="submit">Login</button>
+
+      <div class="switch-form">
+        <p>Don't have an account? <a href="C:/xampp/htdocs/project/regestration.html">Register</a></p>
+
+      </div>
+    </form>
+  </div>
+
+  <script>
+    var registeredUsers = []; // Array to store registered users (for demonstration purposes)
+
+    function validateRegistration(event) {
+      event.preventDefault();
+
+      var regUsername = document.getElementById('reg-username').value;
+      var regEmail = document.getElementById('reg-email').value;
+      var regPassword = document.getElementById('reg-password').value;
+
+      if (isUserRegistered(regUsername)) {
+        showRegistrationError('Username is already taken. Please choose another.');
+        return;
+      }
+
+      if (isEmailRegistered(regEmail)) {
+        showRegistrationError('Email is already registered. Please use another email.');
+        return;
+      }
+
+      // Additional validation logic can be added here
+
+      // For demonstration purposes, store registered users in the array
+      registeredUsers.push({ username: regUsername, email: regEmail, password: regPassword });
+
+      showRegistrationSuccess('Registration successful!');
+    }
+
+    function showRegistrationError(message) {
+      var registrationErrorMessage = document.getElementById('registration-error-message');
+      registrationErrorMessage.textContent = message;
+    }
+
+    function showRegistrationSuccess(message) {
+      var registrationSuccessMessage = document.getElementById('registration-success-message');
+      registrationSuccessMessage.textContent = message;
+      clearRegistrationForm();
+    }
+
+    function isUserRegistered(username) {
+      return registeredUsers.some(user => user.username === username);
+    }
+
+    function isEmailRegistered(email) {
+      return registeredUsers.some(user => user.email === email);
+    }
+
+    function clearRegistrationForm() {
+      document.getElementById('registration-form').reset();
+    }
+
+    function validateLogin(event) {
+      event.preventDefault();
+
+      var loginUsername = document.getElementById('login-username').value;
+      var loginPassword = document.getElementById('login-password').value;
+
+      if (!isUserRegistered(loginUsername) || !validatePassword(loginUsername, loginPassword)) {
+        showLoginError('Invalid username or password. Please try again.');
+        return;
+      }
+
+      // Additional validation logic can be added here
+
+      alert('Login successful!');
+    }
+
+    function showLoginError(message) {
+      var loginErrorMessage = document.getElementById('login-error-message');
+      loginErrorMessage.textContent = message;
+    }
+
+    function validatePassword(username, password) {
+      var user = registeredUsers.find(user => user.username === username);
+      return user && user.password === password;
+    }
+
+    function showRegistrationForm() {
+      document.getElementById('registration-form').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+    }
+
+    function showLoginForm() {
+      document.getElementById('registration-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

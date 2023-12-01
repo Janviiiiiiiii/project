@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration and Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      margin: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
+
+    .switch-form {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .switch-form a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .switch-form a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <form id="registration-form" style="display: none;" onsubmit="validateRegistration(event)">
+      <h2>Student Registration</h2>
+
+      <div class="error-message" id="registration-error-message"></div>
+
+      <label for="reg-username">Username:</label>
+      <input type="text" id="reg-username" name="reg-username" required>
+
+      <label for="reg-email">Email:</label>
+      <input type="email" id="reg-email" name="reg-email" required>
+
+      <label for="reg-password">Password:</label>
+      <input type="password" id="reg-password" name="reg-password" required>
+
+      <button type="submit">Register</button>
+
+      <div class="switch-form">
+        <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
+      </div>
+    </form>
+
+    <form id="login-form" onsubmit="validateLogin(event)">
+      <h2>Student Login</h2>
+
+      <div class="error-message" id="login-error-message"></div>
+
+      <label for="login-username">Username:</label>
+      <input type="text" id="login-username" name="login-username" required>
+
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" name="login-password" required>
+
+      <button type="submit">Login</button>
+
+      <div class="switch-form">
+        <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateRegistration(event) {
+      event.preventDefault();
+
+      var regUsername = document.getElementById('reg-username').value;
+      var regEmail = document.getElementById('reg-email').value;
+      var regPassword = document.getElementById('reg-password').value;
+
+      if (regUsername.trim() === '' || regEmail.trim() === '' || regPassword.trim() === '') {
+        showRegistrationError('Please fill in all fields.');
+        return;
+      }
+
+      // Additional validation logic can be added here
+
+      alert('Registration successful!');
+    }
+
+    function showRegistrationError(message) {
+      var registrationErrorMessage = document.getElementById('registration-error-message');
+      registrationErrorMessage.textContent = message;
+    }
+
+    function validateLogin(event) {
+      event.preventDefault();
+
+      var loginUsername = document.getElementById('login-username').value;
+      var loginPassword = document.getElementById('login-password').value;
+
+      if (loginUsername.trim() === '' || loginPassword.trim() === '') {
+        showLoginError('Please enter both username and password.');
+        return;
+      }
+
+      // Additional validation logic can be added here
+
+      alert('Login successful!');
+    }
+
+    function showLoginError(message) {
+      var loginErrorMessage = document.getElementById('login-error-message');
+      loginErrorMessage.textContent = message;
+    }
+
+    function showRegistrationForm() {
+      document.getElementById('registration-form').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+    }
+
+    function showLoginForm() {
+      document.getElementById('registration-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

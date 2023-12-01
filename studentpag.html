@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Student Page</title>
+</head>
+<body>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+#participation-list, #update-participation-form {
+    margin-top: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#participation-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.participation-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px;
+    width: 250px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.participation-card h3 {
+    color: #007BFF;
+}
+</style>
+    <div class="container">
+        <h1>Student Page</h1>
+
+        <section id="participation-list">
+            <h2>Participated Events</h2>
+            <div id="participation-container"></div>
+        </section>
+
+        <section id="update-participation-form">
+            <h2>Update Participation</h2>
+            <form id="updateParticipationForm">
+                <label for="eventNameUpdate">Event Name:</label>
+                <input type="text" id="eventNameUpdate" required>
+
+                <label for="participationStatus">Participation Status:</label>
+                <select id="participationStatus" required>
+                    <option value="Attended">Attended</option>
+                    <option value="Not Attended">Not Attended</option>
+                </select>
+
+                <button type="button" onclick="updateParticipation()">Update Participation</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="script.js">
+document.addEventListener('DOMContentLoaded', function() {
+    // Sample data for participated events
+    const participatedEvents = [
+        { name: 'Event 1', status: 'Attended' },
+        { name: 'Event 2', status: 'Not Attended' },
+        // Add more participated events as needed
+    ];
+
+    // Display participated events
+    const participationContainer = document.getElementById('participation-container');
+    participatedEvents.forEach(event => {
+        const participationCard = document.createElement('div');
+        participationCard.classList.add('participation-card');
+        participationCard.innerHTML = `<h3>${event.name}</h3><p>Status: ${event.status}</p>`;
+        participationContainer.appendChild(participationCard);
+    });
+});
+
+function updateParticipation() {
+    const eventNameUpdate = document.getElementById('eventNameUpdate').value;
+    const participationStatus = document.getElementById('participationStatus').value;
+
+    // Handle update participation logic (e.g., send data to the server)
+    // For simplicity, this example just logs the update details to the console
+    console.log(`Updated status of ${eventNameUpdate} to ${participationStatus}`);
+}
+
+</script>
+
+</body>
+</html>
